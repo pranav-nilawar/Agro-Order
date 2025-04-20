@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 export default function AdminDashboard() {
   const router = useRouter();
   const [role, setRole] = useState<string | null>(null);
@@ -24,19 +26,19 @@ export default function AdminDashboard() {
   }, []);
 
   const fetchData = async () => {
-    const o = await axios.get('http://localhost:4000/orders');
-    const p = await axios.get('http://localhost:4000/products');
+    const o = await axios.get(`${apiUrl}/orders`);
+    const p = await axios.get(`${apiUrl}/products`);
     setOrders(o.data);
     setProducts(p.data);
   };
 
   const updateStatus = async (id: number, status: string) => {
-    await axios.put(`http://localhost:4000/orders/${id}`, { status });
+    await axios.put(`${apiUrl}/orders/${id}`, { status });
     fetchData();
   };
 
   const addProduct = async () => {
-    await axios.post('http://localhost:4000/products', {
+    await axios.post(`${apiUrl}/products`, {
       name: newProduct.name,
       price: parseFloat(newProduct.price),
     });
@@ -47,12 +49,12 @@ export default function AdminDashboard() {
   const editProduct = async (id: number, field: string, value: any) => {
     const updated = products.find(p => p.id === id);
     updated[field] = value;
-    await axios.put(`http://localhost:4000/products/${id}`, updated);
+    await axios.put(`${apiUrl}/products/${id}`, updated);
     fetchData();
   };
 
   const deleteProduct = async (id: number) => {
-    await axios.delete(`http://localhost:4000/products/${id}`);
+    await axios.delete(`${apiUrl}/products/${id}`);
     fetchData();
   };
 
