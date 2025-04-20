@@ -4,6 +4,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 export default function Register() {
   const router = useRouter();
   const [form, setForm] = useState({ username: '', password: '', role: 'user' });
@@ -14,7 +16,7 @@ export default function Register() {
 
   const handleSubmit = async () => {
     try {
-      await axios.post('http://localhost:4000/auth/register', form);
+      await axios.post('${apiUrl}/auth/register', form);
       alert('Registered! Please login.');
       router.push('/Login');
     } catch (err) {
