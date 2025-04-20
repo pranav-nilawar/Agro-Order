@@ -6,11 +6,16 @@ const prisma = new PrismaClient();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const SECRET = 'super-secret-key';
+const cors = require('cors');
 
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+app.use(cors({
+  origin: 'https://agro-order-2.vercel.app',
+  credentials: true
+}));
 
 // Products
 app.get('/products', async (req, res) => {
