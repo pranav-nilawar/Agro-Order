@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+#  AgriOrder - Bulk Vegetable/Fruit Ordering Web App
 
-First, run the development server:
+A full-stack web application to simplify the process of placing and managing bulk vegetable and fruit orders. Buyers can browse products and place orders, while admins can manage inventory and track order statuses.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+###  Buyers
+- Browse a catalogue of fresh produce
+- Add multiple products and quantities
+- Submit bulk orders with delivery details
+- Track order status in real time
 
-## Learn More
+###  Admins
+- Add, edit, or delete products
+- View and manage all incoming orders
+- Update order statuses: Pending → In Progress → Delivered
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Steps to Test & Run Web App
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Step 1: Install PostgreSQL on Windows
+    1. Go to https://www.postgresql.org/download/windows/
+    2. Click the "Download the installer" button (hosted by EDB).
+    3. Run the installer:
+        Install PostgreSQL, pgAdmin (optional), and command line tools.
+        Choose a password for the postgres superuser (store it securely).
+        Leave port as 5432.
 
-## Deploy on Vercel
+### Step 2: Add to PATH
+    Ensure PostgreSQL’s bin folder is in your system’s PATH:
+    For Eg, C:\Program Files\PostgreSQL\15\bin
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Step 3: Update your .env file 
+    DATABASE_URL="postgresql://postgres:<your-password>@localhost:5432/mydb"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Step 4: Install all dependencies
+    1. For Frontend:
+        cd agri-order
+        npm install tailwindcss postcss autoprefixer prisma @prisma/client axios react-hook-form zod
+        npx prisma init
+
+    2. For Backend:
+        cd agri-order-server
+        npm init -y
+        npm install express cors pg prisma
+        npx prisma init
+        npx prisma migrate dev --name init
+        npx prisma generate
+
+### Step 5: Run Everything
+    Backend: 
+        cd agri-order-server 
+        node index.js
+    Frontend: 
+        cd agri-order 
+        npm run build
+        npm start
+
+
+
+
+
+
+##  Tech Stack
+
+| Layer        | Tech                          |
+|--------------|-------------------------------|
+| Frontend     | React.js (with Tailwind CSS)  |
+| Backend      | Node.js + Express             |
+| Database     | PostgreSQL                    |
+| ORM          | Prisma                        |
+| API Requests | Axios                         |
+| Validation   | Zod + react-hook-form         |
+| Deployment   | Vercel (Frontend), Railway/Render (Backend + DB) |
