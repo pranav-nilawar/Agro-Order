@@ -7,7 +7,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import RequireAuth from '../components/RequireAuth';
 
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 // Validation schema using Zod
 const schema = z.object({
