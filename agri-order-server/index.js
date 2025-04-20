@@ -7,6 +7,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const SECRET = 'super-secret-key';
 
+const PORT = process.env.PORT || 4000;
+
 app.use(cors());
 app.use(express.json());
 
@@ -104,4 +106,6 @@ function verify(req, res, next) {
 }
   
 
-app.listen(4000, () => console.log('API running on http://localhost:4000'));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
