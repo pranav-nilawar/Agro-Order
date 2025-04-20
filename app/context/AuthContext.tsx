@@ -3,6 +3,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 const AuthContext = createContext<any>(null);
 export const useAuth = () => useContext(AuthContext);
 
@@ -20,7 +22,7 @@ export const AuthProvider = ({ children }: any) => {
   }, []);
 
   const login = async (username: string, password: string) => {
-    const res = await axios.post("http://localhost:4000/auth/login", {
+    const res = await axios.post("${apiUrl}/auth/login", {
       username,
       password,
     });
