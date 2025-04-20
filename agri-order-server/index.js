@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const SECRET = 'super-secret-key';
-const cors = require('cors');
 
 const PORT = process.env.PORT || 4000;
 
