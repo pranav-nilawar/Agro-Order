@@ -3,13 +3,15 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 export default function TrackOrder() {
   const [orderId, setOrderId] = useState('');
   const [order, setOrder] = useState<any>(null);
 
   const fetchOrder = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/orders/${orderId}`);
+      const res = await axios.get(`${apiUrl}/orders/${orderId}`);
       setOrder(res.data);
     } catch {
       alert('Order not found');
