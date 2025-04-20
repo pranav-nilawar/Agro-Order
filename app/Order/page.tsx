@@ -7,6 +7,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import RequireAuth from '../components/RequireAuth';
 
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 // Validation schema using Zod
 const schema = z.object({
   buyerName: z.string().min(1, "Name is required"),
@@ -53,7 +55,7 @@ export default function Order() {
   const { fields, append } = useFieldArray({ control, name: "items" });
 
   useEffect(() => {
-    axios.get("http://localhost:4000/products").then((res) => setProducts(res.data));
+    axios.get("${apiUrl}/products").then((res) => setProducts(res.data));
   }, []);
 
   const onSubmit = async (data: any) => {
@@ -67,7 +69,7 @@ export default function Order() {
         })),
       };
 
-      const response = await axios.post("http://localhost:4000/orders", orderData);
+      const response = await axios.post("${apiUrl}/orders", orderData);
       setOrderId(response.data.id); // Set the order ID from the response
       alert("Order placed successfully!");
       reset(); // Clear the form after successful submission
