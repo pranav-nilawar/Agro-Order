@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const apiUrl = import.meta.env.VITE_API_BASE_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function TrackOrder() {
   const [orderId, setOrderId] = useState('');
