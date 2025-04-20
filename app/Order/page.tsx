@@ -55,7 +55,7 @@ export default function Order() {
   const { fields, append } = useFieldArray({ control, name: "items" });
 
   useEffect(() => {
-    axios.get("${apiUrl}/products").then((res) => setProducts(res.data));
+    axios.get(`${apiUrl}/products`).then((res) => setProducts(res.data));
   }, []);
 
   const onSubmit = async (data: any) => {
@@ -69,7 +69,7 @@ export default function Order() {
         })),
       };
 
-      const response = await axios.post("${apiUrl}/orders", orderData);
+      const response = await axios.post(`${apiUrl}/orders`, orderData);
       setOrderId(response.data.id); // Set the order ID from the response
       alert("Order placed successfully!");
       reset(); // Clear the form after successful submission
