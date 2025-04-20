@@ -4,6 +4,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
 export default function Login() {
   const router = useRouter();
   const [username, setUsername] = useState('');
@@ -11,7 +13,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:4000/auth/login', {
+      const response = await axios.post('${apiUrl}/auth/login', {
         username,
         password,
       });
