@@ -13,7 +13,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('${apiUrl}/auth/login', {
+      const response = await axios.post(`${apiUrl}/auth/login`, {
         username,
         password,
       });
